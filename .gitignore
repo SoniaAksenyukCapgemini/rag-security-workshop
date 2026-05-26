@@ -1,0 +1,8 @@
+.env
+.chroma_db/
+__pycache__/
+*.pyc
+*.tmp
+*.lock.*
+.venv/
+# uv.lock jest celowo poza .gitignore — commituj go dla powtarzalnosci srodowiska
