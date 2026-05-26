@@ -1,0 +1,18 @@
+[project]
+name = "rag-security-workshop"
+version = "0.1.0"
+description = "Warsztat: Bezpieczenstwo LLM — Indirect Prompt Injection w systemach RAG"
+requires-python = ">=3.11"
+dependencies = [
+    "langchain>=0.2.0",
+    "langchain-google-genai>=1.0.0",
+    "langchain-community>=0.2.0",
+    "chromadb>=0.5.0",
+    "pypdf>=4.0.0",
+    "python-dotenv>=1.0.0",
+    "reportlab>=4.0.0",
+    "streamlit>=1.35.0",
+]
+
+[tool.uv]
+dev-dependencies = []
