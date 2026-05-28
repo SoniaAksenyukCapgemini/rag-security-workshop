@@ -7,7 +7,6 @@ UWAGA: PROMPT_TEMPLATE jest celowo podatny na Indirect Prompt Injection.
 Służy wyłącznie do celów edukacyjnych.
 """
 
-import os
 import shutil
 from pathlib import Path
 
@@ -15,8 +14,8 @@ from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_community.vectorstores import Chroma
-from langchain.chains import RetrievalQA
-from langchain.prompts import PromptTemplate
+from langchain_classic.chains import RetrievalQA
+from langchain_classic.prompts import PromptTemplate
 
 DOCS_DIR = Path("docs")
 CHROMA_DIR = Path(".chroma_db")
