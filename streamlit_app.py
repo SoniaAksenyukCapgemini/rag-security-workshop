@@ -14,7 +14,7 @@ from pathlib import Path
 import streamlit as st
 from dotenv import load_dotenv
 
-from rag import DOCS_DIR, CHROMA_DIR, ask, build_chain, load_and_index
+from rag import DOCS_DIR, ask, build_chain, load_and_index
 import traceback
 import os
 
@@ -130,15 +130,6 @@ if not snapshot:
 
 with st.spinner("⏳ Indeksuję dokumenty i buduję bazę wektorową..."):
     try:
-        # Debug: show Chroma DB path and permissions
-        try:
-            st.info(f"Chroma DB path: {CHROMA_DIR}")
-            st.info(
-                f"Permissions: {oct(os.stat(CHROMA_DIR).st_mode & 0o777)} owner={os.stat(CHROMA_DIR).st_uid}\n"
-            )
-        except Exception as _:
-            st.info(f"Chroma DB path: {CHROMA_DIR} (not present yet)")
-
         chain, n_docs, n_chunks = get_chain(snapshot)
     except Exception as e:
         # Show full traceback to help debugging
