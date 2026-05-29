@@ -99,8 +99,8 @@ with st.sidebar:
             new_files.append(f.name)
         if new_files:
             st.success(f"Dodano: {', '.join(new_files)}")
-            # Wyczyść cache żeby wymusić re-indeksowanie
             get_chain.clear()
+            st.session_state.history = []
 
     st.subheader("Zaindeksowane pliki")
     if DOCS_DIR.exists():
@@ -112,6 +112,7 @@ with st.sidebar:
                 if col2.button("🗑", key=f"del_{pdf.name}", help=f"Usuń {pdf.name}"):
                     pdf.unlink()
                     get_chain.clear()
+                    st.session_state.history = []
                     st.rerun()
         else:
             st.info("Brak plików PDF w folderze `docs/`.")
