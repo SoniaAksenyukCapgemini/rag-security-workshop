@@ -39,7 +39,7 @@ if "indexed_files" not in st.session_state:
 def get_chain(file_snapshot: frozenset):
     """Buduje i cachuje łańcuch RAG. Przebudowywany gdy zmieni się file_snapshot."""
     db, n_docs, n_chunks = load_and_index()
-    chain = build_chain(db)
+    chain = build_chain(db, n_docs)
     return chain, n_docs, n_chunks
 
 

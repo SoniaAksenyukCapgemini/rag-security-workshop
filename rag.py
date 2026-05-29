@@ -85,16 +85,19 @@ def load_and_index(docs_dir: Path = DOCS_DIR) -> Chroma:
     return db, len(documents), len(processed_chunks)
 
 
-def build_chain(db: Chroma) -> RetrievalQA:
+def build_chain(db: Chroma, n_docs: int = 1) -> RetrievalQA:
     """Zwraca łańcuch RetrievalQA z podatnym promptem."""
     prompt = PromptTemplate(
         template=PROMPT_TEMPLATE,
         input_variables=["context", "question"],
     )
     llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite", temperature=0)
+    # Retrieve enough chunks to cover every CV (5 chunks per doc is a safe ceiling
+    # for chunk_size=1000 / chunk_overlap=300 on typical one-page CVs).
+    k = max(4, n_docs * 5)
     return RetrievalQA.from_chain_type(
         llm=llm,
-        retriever=db.as_retriever(search_kwargs={"k": 4}),
+        retriever=db.as_retriever(search_kwargs={"k": k}),
         chain_type="stuff",
         chain_type_kwargs={"prompt": prompt},
         return_source_documents=True,
